@@ -127,7 +127,7 @@ fetch('https://cors-anywhere.herokuapp.com/https://gl7.me/api/?key=LwBFBJI1ABVc&
 }else{
 
      $(document).ready(function () {
-        $('.custom-url').attr('href', url);
+        $('.custom-url').attr('href', decodeURIComponent(url));
 });
 
 }
