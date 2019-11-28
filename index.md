@@ -1,37 +1,135 @@
-## Welcome to GitHub Pages
 
-You can use the [editor on GitHub](https://github.com/prossiga/p1/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Prossiga...</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .like {
+            width: 142px;
+            height: 161px;
+            object-fit: contain;
+            margin-bottom: 30px;
+        }
+        .flex{
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+			transform:scale(1.1);
+        }
+		
+  @media screen and (max-width: 900px) {
+   .flex{display: unset !important;}
+   body{ margin-top: 18%;}
+  }
+  .custom-url{transform: SCALE(1.5);}
+  
+  
+        .copy,.alt {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 16.4px;
+            font-weight: bold;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.21px;
+            text-align: center;
+            color: #828282;
+        }
+        .alt {
+            font-weight: normal;
+        }
 
-### Markdown
+        #redirect{
+            margin-top: 30px;
+            display: inline-block;
+            background-color: #5cb85d;
+            text-decoration: none;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.18;
+            letter-spacing: 1.25px;
+            text-align: center;
+            color: #ffffff;
+            padding: 15px 50px;
+            border-radius: 20px;
+            box-shadow: 0 5px 10px 2px rgba(0,0,0,0.3);
+            transition: all 0.1s ease-in-out;
+        }
+        #redirect:hover{
+            background-color: #3ea342;
+            box-shadow: 0 5px 5px 2px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body style="overflow:hidden">
+    <div class="flex">
+        <div class="container">
+            <img src="like.svg" class="like" alt="Like icon">
+            <p class="copy">
+                Tudo certo!
+            </p>
+            <p class="alt">
+                Clique em continuar para ser direcionado para a página solicitada.
+            </p>
+            <a href="#" class="custom-url" id="redirect">Continuar</a>
+        </div>
+    </div>
+</body>
+</html>
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+<script type="text/javascript">
+var query = location.search.slice(1);
+var partes = query.split('&');
+var data = {};
+partes.forEach(function (parte) {
+    var chaveValor = parte.split('=');
+    var chave = chaveValor[0];
+    var valor = chaveValor[1];
+    data[chave] = valor;
+});
 
-```markdown
-Syntax highlighted code block
+var encurtar = data['encurtar'];
+var url = data['url'];
+if(encurtar === 'sim'){
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
 
-**Bold** and _Italic_ and `Code` text
+fetch('http://gl7.me/api/?key=LwBFBJI1ABVc&url='+url,{mode: 'cors'})
+  .then(response => {
+    return response.json()
+  })
+  .then(resultado => {
+    // Work with JSON data here
+	var link = resultado['short'];
+        $(document).ready(function () {
+        $('.custom-url').attr('href', link);
+});
+  })
+  .catch(err => {
+    // Do something for an error here
+  })
 
-[Link](url) and ![Image](src)
-```
+}else{
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+     $(document).ready(function () {
+        $('.custom-url').attr('href', url);
+});
 
-### Jekyll Themes
+}
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/prossiga/p1/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+</script>
