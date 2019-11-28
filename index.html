@@ -109,7 +109,7 @@ if(encurtar === 'sim'){
 
 
 
-fetch('https://gl7.me/api/?key=LwBFBJI1ABVc&url='+url,{mode: 'cors'})
+fetch('https://cors-anywhere.herokuapp.com/https://gl7.me/api/?key=LwBFBJI1ABVc&url='+url,{mode: 'cors'})
   .then(response => {
     return response.json()
   })
